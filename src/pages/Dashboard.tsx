@@ -1,5 +1,6 @@
 import React from "react";
+import { Wrapper } from "../components/Wrapper";
 
 export default function Dashboard() {
-  return <div>Dashboard</div>;
+  return <Wrapper>Dashboard </Wrapper>;
 }
