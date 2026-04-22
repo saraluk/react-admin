@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useCallback, useState } from "react";
 import "../../src/Login.css";
+import axios from "axios";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -9,15 +10,18 @@ export default function Register() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const handleSubmit = useCallback(
-    (e: SyntheticEvent) => {
+    async (e: SyntheticEvent) => {
       e.preventDefault();
-      console.log({
-        firstName,
-        lastName,
+
+      const response = await axios.post("http://localhost:8000/api/register", {
+        first_name: firstName,
+        last_name: lastName,
         email,
         password,
-        passwordConfirm,
+        password_confirm: passwordConfirm,
       });
+
+      console.log(response);
     },
     [email, firstName, lastName, password, passwordConfirm],
   );
@@ -33,7 +37,6 @@ export default function Register() {
           onChange={(e) => setFirstName(e.target.value)}
         />
         <input
-          type="email"
           className="form-control"
           placeholder="Last Name"
           required
