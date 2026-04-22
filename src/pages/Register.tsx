@@ -1,6 +1,7 @@
-import React, { SyntheticEvent, useCallback, useState } from "react";
-import "../../src/Login.css";
 import axios from "axios";
+import { SyntheticEvent, useCallback, useState } from "react";
+import { Navigate } from "react-router-dom";
+import "../../src/Login.css";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -9,22 +10,35 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault();
 
-      const response = await axios.post("http://localhost:8000/api/register", {
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        password,
-        password_confirm: passwordConfirm,
-      });
+      try {
+        const response = await axios.post(
+          "http://localhost:8000/api/register",
+          {
+            first_name: firstName,
+            last_name: lastName,
+            email,
+            password,
+            password_confirm: passwordConfirm,
+          },
+        );
 
-      console.log(response);
+        setShouldRedirect(true);
+      } catch (e) {
+        console.error(e);
+      }
     },
     [email, firstName, lastName, password, passwordConfirm],
   );
+
+  if (shouldRedirect) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <main className="form-signin w-100 m-auto">
