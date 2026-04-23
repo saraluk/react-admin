@@ -9,26 +9,22 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-
-  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault();
 
       try {
-        const response = await axios.post(
-          "http://localhost:8000/api/register",
-          {
-            first_name: firstName,
-            last_name: lastName,
-            email,
-            password,
-            password_confirm: passwordConfirm,
-          },
-        );
+        await axios.post("http://localhost:8000/api/register", {
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+          password_confirm: passwordConfirm,
+        });
 
-        setShouldRedirect(true);
+        setRedirect(true);
       } catch (e) {
         console.error(e);
       }
@@ -36,7 +32,7 @@ export default function Register() {
     [email, firstName, lastName, password, passwordConfirm],
   );
 
-  if (shouldRedirect) {
+  if (redirect) {
     return <Navigate to="/login" />;
   }
 

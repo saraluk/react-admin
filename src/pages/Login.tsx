@@ -1,17 +1,19 @@
-import React, { SyntheticEvent, useCallback, useState } from "react";
-import "../../src/Login.css";
 import axios from "axios";
+import { SyntheticEvent, useCallback, useState } from "react";
+import { Navigate } from "react-router-dom";
+import "../../src/Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = useCallback(
     async (e: SyntheticEvent) => {
       e.preventDefault();
 
       try {
-        const response = await axios.post(
+        await axios.post(
           "http://localhost:8000/api/login",
           {
             email,
@@ -20,13 +22,17 @@ export default function Login() {
           { withCredentials: true },
         );
 
-        console.log(response.data);
+        setRedirect(true);
       } catch (e) {
         console.error(e);
       }
     },
     [email, password],
   );
+
+  if (redirect) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <main className="form-signin w-100 m-auto">
