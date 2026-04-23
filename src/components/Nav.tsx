@@ -1,41 +1,47 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export function Nav() {
+  const [user, setUser] = useState({
+    firstName: "",
+  });
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8000/api/user", {
+          withCredentials: true,
+        });
+        setUser({
+          firstName: data.first_name,
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    getUser();
+  }, []);
+
   return (
-    <header
-      className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
+    <nav
+      className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
       data-bs-theme="dark"
     >
       <a
-        className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
+        className="navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-decoration-none"
         href="#"
       >
         Company name
       </a>
-      <button
-        className="navbar-toggler position-absolute d-md-none collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <input
-        className="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <ul className="navbar-nav px-3">
-        <li className="nav-item text-nowrap">
-          <a className="nav-link" href="#">
-            Sign out
-          </a>
-        </li>
+      <ul className="my-2 my-md-0 mr-md-3">
+        <a className="p-2 text-white text-decoration-none" href="#">
+          {user.firstName}
+        </a>
+        <a className="p-2 text-white text-decoration-none" href="#">
+          Sign out
+        </a>
       </ul>
-    </header>
+    </nav>
   );
 }
