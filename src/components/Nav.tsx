@@ -1,10 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Nav() {
   const [user, setUser] = useState({
     firstName: "",
   });
+
+  const handleLogout = async () => {
+    await axios.post("logout");
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -33,12 +38,16 @@ export function Nav() {
         Company name
       </a>
       <ul className="my-2 my-md-0 mr-md-3">
-        <a className="p-2 text-white text-decoration-none" href="#">
+        <Link className="p-2 text-white text-decoration-none" to="/profile">
           {user.firstName}
-        </a>
-        <a className="p-2 text-white text-decoration-none" href="#">
+        </Link>
+        <Link
+          className="p-2 text-white text-decoration-none"
+          to="/login"
+          onClick={handleLogout}
+        >
           Sign out
-        </a>
+        </Link>
       </ul>
     </nav>
   );
