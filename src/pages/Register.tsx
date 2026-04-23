@@ -16,7 +16,7 @@ export default function Register() {
       e.preventDefault();
 
       try {
-        await axios.post("http://localhost:8000/api/register", {
+        await axios.post("register", {
           first_name: firstName,
           last_name: lastName,
           email,

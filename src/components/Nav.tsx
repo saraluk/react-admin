@@ -9,9 +9,7 @@ export function Nav() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8000/api/user", {
-          withCredentials: true,
-        });
+        const { data } = await axios.get("user");
         setUser({
           firstName: data.first_name,
         });

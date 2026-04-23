@@ -13,14 +13,10 @@ export default function Login() {
       e.preventDefault();
 
       try {
-        await axios.post(
-          "http://localhost:8000/api/login",
-          {
-            email,
-            password,
-          },
-          { withCredentials: true },
-        );
+        await axios.post("login", {
+          email,
+          password,
+        });
 
         setRedirect(true);
       } catch (e) {
