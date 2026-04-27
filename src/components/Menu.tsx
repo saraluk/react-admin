@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function Menu() {
   return (
@@ -25,14 +25,14 @@ export function Menu() {
         <div className="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
           <ul className="nav flex-column">
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/">
+              <NavLink className="nav-link" aria-current="page" to="/">
                 Dashboard
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" to="/users">
+              <NavLink className="nav-link" aria-current="page" to="/users">
                 Users
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
