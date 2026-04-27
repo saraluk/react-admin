@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { User } from "../models/user";
 
 export function Nav() {
-  const [user, setUser] = useState({
-    firstName: "",
-  });
+  const [user, setUser] = useState(new User());
 
   const handleLogout = async () => {
     await axios.post("logout");
@@ -15,9 +14,7 @@ export function Nav() {
     const getUser = async () => {
       try {
         const { data } = await axios.get("user");
-        setUser({
-          firstName: data.first_name,
-        });
+        setUser(new User(data.id, data.first_name, data.last_name, data.email));
       } catch (e) {
         console.error(e);
       }
@@ -39,7 +36,7 @@ export function Nav() {
       </a>
       <ul className="my-2 my-md-0 mr-md-3">
         <Link className="p-2 text-white text-decoration-none" to="/profile">
-          {user.firstName}
+          {user.name}
         </Link>
         <Link
           className="p-2 text-white text-decoration-none"
