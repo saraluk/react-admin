@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Wrapper } from "../../components/Wrapper";
 import axios from "axios";
 import { User } from "../../models/user";
+import { Link } from "react-router-dom";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -58,6 +59,12 @@ export default function Users() {
 
   return (
     <Wrapper>
+      <div className="pt-3 pb-2 mb-3 border-bottom">
+        <Link to="/users/create" className="btn btn-sm btn-outline-secondary">
+          Add
+        </Link>
+      </div>
+
       <div className="table-responsive small">
         <table className="table table-striped table-sm">
           <thead>
