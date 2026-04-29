@@ -10,9 +10,13 @@ export default function Users() {
 
   useEffect(() => {
     const getUsers = async () => {
-      const { data } = await axios.get(`users?page=${page}`);
-      setUsers(data.data);
-      setLastPage(data.meta.last_page);
+      try {
+        const { data } = await axios.get(`users?page=${page}`);
+        setUsers(data.data);
+        setLastPage(data.meta.last_page);
+      } catch (e) {
+        console.error(e);
+      }
     };
 
     getUsers();
@@ -32,6 +36,18 @@ export default function Users() {
 
   const handleNumberClick = (page: number) => {
     setPage(page);
+  };
+
+  const handleDeleteClick = async (id: number) => {
+    if (window.confirm("Are you sure you want to delete this record?")) {
+      try {
+        await axios.delete(`users/${id}`);
+
+        setUsers(users.filter((user: User) => user.id !== id));
+      } catch (e) {
+        console.error(e);
+      }
+    }
   };
 
   const paginatedNumbers = useMemo(() => {
@@ -62,7 +78,17 @@ export default function Users() {
                 </td>
                 <td>{user.email}</td>
                 <td>{user.role.name}</td>
-                <td></td>
+                <td>
+                  <div className="btn-group mr-2">
+                    <a
+                      href="#"
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => handleDeleteClick(user.id)}
+                    >
+                      Delete
+                    </a>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
