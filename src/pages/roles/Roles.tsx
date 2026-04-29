@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Wrapper } from "../../components/Wrapper";
 import { Role } from "../../models/role";
-import { Link } from "react-router-dom";
 
 export function Roles() {
   const [roles, setRoles] = useState([]);

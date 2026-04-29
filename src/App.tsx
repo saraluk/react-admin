@@ -3,10 +3,10 @@ import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { UserCreate } from "./pages/users/UserCreate";
-import Users from "./pages/users/Users";
-import { UserEdit } from "./pages/users/UserEdit";
 import { Roles } from "./pages/roles/Roles";
+import { UserCreate } from "./pages/users/UserCreate";
+import { UserEdit } from "./pages/users/UserEdit";
+import Users from "./pages/users/Users";
 
 function App() {
   return (

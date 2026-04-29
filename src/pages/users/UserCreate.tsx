@@ -1,8 +1,8 @@
 import axios from "axios";
 import { SyntheticEvent, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Wrapper } from "../../components/Wrapper";
 import { Role } from "../../models/role";
-import { Navigate } from "react-router-dom";
 
 export function UserCreate() {
   const [firstName, setFirstName] = useState("");

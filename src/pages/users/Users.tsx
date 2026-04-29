@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Wrapper } from "../../components/Wrapper";
 import axios from "axios";
-import { User } from "../../models/user";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Wrapper } from "../../components/Wrapper";
+import { User } from "../../models/user";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
