@@ -34,6 +34,11 @@ export function Menu() {
                 Users
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/roles">
+                Roles
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>
