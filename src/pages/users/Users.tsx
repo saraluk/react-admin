@@ -93,13 +93,13 @@ export default function Users() {
                     >
                       Edit
                     </Link>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="btn btn-sm btn-outline-secondary"
                       onClick={() => handleDeleteClick(user.id)}
                     >
                       Delete
-                    </a>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -111,29 +111,36 @@ export default function Users() {
       <nav>
         <ul className="pagination">
           <li className={`page-item ${page === 1 ? "disabled" : ""}`}>
-            <a href="#" className="page-link" onClick={handlePreviousClick}>
+            <button
+              type="button"
+              className="page-link"
+              onClick={handlePreviousClick}
+              disabled={page === 1}
+            >
               Previous
-            </a>
+            </button>
           </li>
           {paginatedNumbers.map((num) => (
             <li className={`page-item ${page === num ? "active" : ""}`}>
-              <a
+              <button
+                type="button"
                 className="page-link"
-                href="#"
                 onClick={() => handleNumberClick(num)}
+                aria-current={page === num ? "page" : undefined}
               >
                 {num}
-              </a>
+              </button>
             </li>
           ))}
-          <li className="page-item">
-            <a
-              className={`page-link ${page === lastPage ? "disabled" : ""}`}
-              href="#"
+          <li className={`page-item ${page === lastPage ? "disabled" : ""}`}>
+            <button
+              type="button"
+              className="page-link"
               onClick={handleNextClick}
+              disabled={page === lastPage}
             >
               Next
-            </a>
+            </button>
           </li>
         </ul>
       </nav>

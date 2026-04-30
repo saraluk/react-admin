@@ -61,13 +61,13 @@ export function Roles() {
                     >
                       Edit
                     </Link>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="btn btn-sm btn-outline-secondary"
                       onClick={() => handleDeleteClick(role.id)}
                     >
                       Delete
-                    </a>
+                    </button>
                   </div>
                 </td>
               </tr>
