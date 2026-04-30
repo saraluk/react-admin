@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Wrapper } from "../../components/Wrapper";
 import { Permission } from "../../models/permission";
+import { Navigate } from "react-router-dom";
 
 export function RoleCreate() {
   const [permissions, setPermissions] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<Array<number>>([]);
+  const [name, setName] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     const getPermissions = async () => {
@@ -20,17 +23,45 @@ export function RoleCreate() {
     getPermissions();
   }, []);
 
-  const handleCheckPermission = (id: number) => {};
+  const handleCheckPermission = (id: number) => {
+    if (selected.some((s) => s === id)) {
+      setSelected(selected.filter((s) => s !== id));
+      return;
+    }
+
+    setSelected([...selected, id]);
+  };
+
+  const handleSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("roles", {
+        name,
+        permissions: selected,
+      });
+
+      setRedirect(true);
+    } catch (e) {}
+  };
+
+  if (redirect) {
+    return <Navigate to="/roles" />;
+  }
 
   return (
     <Wrapper>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3 mt-3 row">
           <label htmlFor="name" className="col-sm-2 col-form-label">
             Name
           </label>
           <div className="col-sm-10">
-            <input className="form-control" id="name" />
+            <input
+              className="form-control"
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
         </div>
 
