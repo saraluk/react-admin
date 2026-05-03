@@ -38,6 +38,11 @@ export function Menu() {
                 Roles
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/products">
+                Products
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

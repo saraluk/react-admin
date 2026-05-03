@@ -39,7 +39,7 @@ export function Roles() {
           Add
         </Link>
       </div>
-      <div className="table-responsive small">
+      <div className="table-responsive">
         <table className="table table-striped table-sm">
           <thead>
             <tr>
